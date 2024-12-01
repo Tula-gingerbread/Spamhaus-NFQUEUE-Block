@@ -5,7 +5,7 @@ This is Python code to block IPv4 addresses that Spamhaus identifies as malware.
 ## Files/Directories
 - `main.py`: Main script.
 - `config.py`: Configuration file. You can run it to see your current configuration.
-- `iptables.py`: Script to set up iptables. You can run it to automatically set/remove iptables rules.
+- `iptables.py`: Extension for `main.py` to set up/clean iptables rules
 - `util.py`: Extension for `main.py` to fetch and parse Spamhaus data.
 - `cache/`: Directory for caching Spamhaus data and the last data fetch in UNIX timestamp.
 
