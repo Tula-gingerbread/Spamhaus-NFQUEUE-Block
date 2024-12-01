@@ -87,8 +87,8 @@ def main() -> None:
     try:
         nfqueue.bind(config.NFQUEUE_NUM, packetv4_handler)
         iptables.add_rules()
+        print('Begin NFQUEUE processing')
         nfqueue.run()
-        print('NFQUEUE proccessing began')
     except KeyboardInterrupt:
         print('KeyboardInterrupt', file=sys.stderr)
     except Exception as ex:
