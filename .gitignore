@@ -1,0 +1,9 @@
+__pycache__/
+DROPv4.txt
+lastfetch.txt
+
+.vscode/
+.idea/
+
+env/
+venv/
