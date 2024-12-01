@@ -1,9 +1,12 @@
 __pycache__/
-DROPv4.txt
-lastfetch.txt
 
 .vscode/
 .idea/
 
 env/
 venv/
+
+DROPv4.txt
+DROPv6.txt
+lastfetchv4.txt
+lastfetchv6.txt

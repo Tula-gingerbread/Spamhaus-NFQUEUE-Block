@@ -24,13 +24,33 @@ if os.getuid() != 0:    # Check user
     sys.exit(2)
 
 
-def add_rules():
-    """Adds rules to INPUT and FORWARD chains"""
-    for chain in config.IPTABLES_CHAINS:
-        subprocess.call(['iptables', '-A', chain, '-j', 'NFQUEUE', '--queue-num', str(config.NFQUEUE_NUM)])
+def add_rulesv4():
+    """Adds rules to specified chains. v4"""
+    if 4 in config.ADDRESS_FAMILY:
+        for chain in config.IPTABLES_CHAINS:
+            subprocess.call(['iptables', '-A', chain, '-j', 'NFQUEUE', '--queue-num', str(config.NFQUEUEV4_NUM)])
+
+def add_rulesv6():
+    """Adds rules to specified chains. v6"""
+    if 6 in config.ADDRESS_FAMILY:
+        for chain in config.IPTABLES_CHAINS:
+            subprocess.call(['ip6tables', '-A', chain, '-j', 'NFQUEUE', '--queue-num', str(config.NFQUEUEV6_NUM)])
 
 
-def remove_rules():
-    """Removes rules from INPUT and FORWARD chains"""
-    for chain in config.IPTABLES_CHAINS:
-        subprocess.call(['iptables', '-D', chain, '-j', 'NFQUEUE', '--queue-num', str(config.NFQUEUE_NUM)])
+def remove_rulesv4():
+    """Removes rules from specified chains. v4"""
+    print('Я чищу блять v4')
+    if 4 in config.ADDRESS_FAMILY:
+        for chain in config.IPTABLES_CHAINS:
+            subprocess.call(['iptables', '-D', chain, '-j', 'NFQUEUE', '--queue-num', str(config.NFQUEUEV4_NUM)])
+
+def remove_rulesv6():
+    """Remove rules from specifed chains. v6"""
+    print('Я чищу блять v6')
+    if 6 in config.ADDRESS_FAMILY:
+        for chain in config.IPTABLES_CHAINS:
+            subprocess.call(['ip6tables', '-D', chain, '-j', 'NFQUEUE', '--queue-num', str(config.NFQUEUEV6_NUM)])
+
+if __name__ == '__main__':
+    remove_rulesv4()
+    remove_rulesv6()
