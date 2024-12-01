@@ -38,8 +38,8 @@ This is Python code to block IPv4 addresses that Spamhaus identifies as malware.
 - This script works only with iptables, so ensure you have iptables installed.
 - I tested it with Python 3.12.7, Arch Linux, and iptables v1.8.10 (legacy).
 - If you change iptables rules, ensure that the script's rules are below others. Alternatively, stop the script, change the rules, and run it again.
-- The script updates the blocklist once per start.
+- The script updates the blocklist once per start if the cache has expired.
 
 
 ## License
-GNU General v3. Check the `COPYING` file
+GNU General Public License v3. Check the `COPYING` file
