@@ -33,6 +33,10 @@ This is Python code to block IPv4 addresses that Spamhaus identifies as malware.
     python main.py > /dev/null
     ```
 
+## Contributing
+
+I welcome contributions to this project! If you have suggestions, improvements, or bug fixes, please feel free to submit a pull request.
+
 ## Notes
 - Ensure your operating system is GNU/Linux.
 - This script works only with iptables, so ensure you have iptables installed.
@@ -43,3 +47,4 @@ This is Python code to block IPv4 addresses that Spamhaus identifies as malware.
 
 ## License
 GNU General Public License v3. Check the `COPYING` file
+
