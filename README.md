@@ -1,6 +1,6 @@
 # Spamhaus NFQUEUE Block
 
-This is Python code to block IPv4 addresses that Spamhaus identifies as malware.
+This is Python code to block IPv4/IPv6 addresses that Spamhaus identifies as malware.
 
 ## Files/Directories
 - `main.py`: Main script.
