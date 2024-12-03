@@ -59,55 +59,6 @@ def parse_blocklist(DROPLIST_FILE: str) -> list[ipaddress.IPv4Network|ipaddress.
 
     return ip_networks
 
-
-def fetch_and_parse_all_by_config() -> dict[int, list | None]:
-    ret = {
-        4: None,
-        6: None
-    }
-
-
-    if 4 in config.ADDRESS_FAMILY:
-        # Try read LAST_FETCHV4_FILE
-        try:
-            with open(config.LAST_FETCHV4_FILE, 'r', encoding='utf-8') as file:
-                last_fetchv4 = int(file.read())
-        except (FileNotFoundError, ValueError) as e:
-            last_fetchv4 = 0
-            with open(config.LAST_FETCHV4_FILE, 'w', encoding='utf-8') as file:
-                file.write('0')
-            print(f'Cannot open file or convert content to int. File created. Error: {e}', file=sys.stderr)
-        
-        # If expired, fetch fresh file
-        if (last_fetchv4 + config.EXPIRE_AFTER) < int(time.time()):
-            print('Fetching fresh drov4list...')
-            fetch_droplist(config.SPAMHAUS_DROPV4_URL, config.DROPLISTV4_CACHE_FILE, config.LAST_FETCHV4_FILE)
-        
-        v4blocklist = parse_blocklist(config.DROPLISTV4_CACHE_FILE)
-        ret[4] = v4blocklist
-
-    
-    if 6 in config.ADDRESS_FAMILY:
-        # Try read LAST_FETCHV6_FILE
-        try:
-            with open(config.LAST_FETCHV6_FILE, 'r', encoding='utf-8') as file:
-                last_fetchv6 = int(file.read())
-        except (FileNotFoundError, ValueError) as e:
-            last_fetchv6 = 0
-            with open(config.LAST_FETCHV6_FILE, 'w', encoding='utf-8') as file:
-                file.write('0')
-            print(f'Cannot open file or convert content to int. File created. Error: {e}', file=sys.stderr)
-        
-        # If expired, fetch fresh file
-        if (last_fetchv6 + config.EXPIRE_AFTER) < int(time.time()):
-            print('Fetching fresh drov6list...')
-            fetch_droplist(config.SPAMHAUS_DROPV6_URL, config.DROPLISTV6_CACHE_FILE, config.LAST_FETCHV6_FILE)
-        
-        v6blocklist = parse_blocklist(config.DROPLISTV6_CACHE_FILE)
-        ret[6] = v6blocklist
-
-    return ret
-
 def has_cap_net_admin():
     try:
         with open('/proc/self/status', 'r', encoding='utf-8') as f:
