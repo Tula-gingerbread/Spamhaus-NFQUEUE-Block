@@ -107,3 +107,14 @@ def fetch_and_parse_all_by_config() -> dict[int, list | None]:
         ret[6] = v6blocklist
 
     return ret
+
+def has_cap_net_admin():
+    try:
+        with open('/proc/self/status', 'r', encoding='utf-8') as f:
+            for line in f:
+                if line.startswith('CapEff:'):
+                    cap_eff = int(line.split()[1], 16)
+                    return (cap_eff & (1 << 12)) != 0  # 12 is CAP_NET_ADMIN
+    except (IOError, ValueError) as e:
+        print(f"Error reading /proc/self/status: {e}")
+    return False
