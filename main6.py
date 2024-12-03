@@ -93,6 +93,7 @@ def main() -> None:
         print(f'Unknown error: {ex}', file=sys.stderr)
     finally:
         print('Stop NFQUEUE v6 processing')
+        iptables.remove_rulesv6()
         nfqueue.unbind()
 
 if __name__ == '__main__':

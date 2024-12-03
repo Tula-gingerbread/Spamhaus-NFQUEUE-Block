@@ -93,6 +93,7 @@ def main() -> None:
         print(f'Unknown error: {ex}', file=sys.stderr)
     finally:
         print('Stop NFQUEUE v4 processing')
+        iptables.remove_rulesv4()
         nfqueue.unbind()
 
 if __name__ == '__main__':
