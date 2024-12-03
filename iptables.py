@@ -27,28 +27,23 @@ if os.getuid() != 0:    # Check user
 # ------ Adding rules ------
 def add_rulesv4():
     """Adds rules to specified chains. v4"""
-    if 4 in config.ADDRESS_FAMILY:
-        for chain in config.IPTABLES_CHAINS:
-            subprocess.call(['iptables', '-A', chain, '-j', 'NFQUEUE', '--queue-num', str(config.NFQUEUEV4_NUM)])
+    for chain in config.IPTABLES_CHAINS:
+        subprocess.call(['iptables', '-A', chain, '-j', 'NFQUEUE', '--queue-num', str(config.NFQUEUEV4_NUM)])
 
 
 def add_rulesv6():
     """Adds rules to specified chains. v6"""
-    if 6 in config.ADDRESS_FAMILY:
-        for chain in config.IPTABLES_CHAINS:
-            subprocess.call(['ip6tables', '-A', chain, '-j', 'NFQUEUE', '--queue-num', str(config.NFQUEUEV6_NUM)])
+    for chain in config.IPTABLES_CHAINS:
+        subprocess.call(['ip6tables', '-A', chain, '-j', 'NFQUEUE', '--queue-num', str(config.NFQUEUEV6_NUM)])
 
 
 # ----- Removing rules -----
 def remove_rulesv4():
-    """Removes rules from specified chains. v4"""
-    if 4 in config.ADDRESS_FAMILY:
-        for chain in config.IPTABLES_CHAINS:
-            subprocess.call(['iptables', '-D', chain, '-j', 'NFQUEUE', '--queue-num', str(config.NFQUEUEV4_NUM)])
+    for chain in config.IPTABLES_CHAINS:
+        subprocess.call(['iptables', '-D', chain, '-j', 'NFQUEUE', '--queue-num', str(config.NFQUEUEV4_NUM)])
 
 
 def remove_rulesv6():
     """Remove rules from specifed chains. v6"""
-    if 6 in config.ADDRESS_FAMILY:
-        for chain in config.IPTABLES_CHAINS:
-            subprocess.call(['ip6tables', '-D', chain, '-j', 'NFQUEUE', '--queue-num', str(config.NFQUEUEV6_NUM)])
+    for chain in config.IPTABLES_CHAINS:
+        subprocess.call(['ip6tables', '-D', chain, '-j', 'NFQUEUE', '--queue-num', str(config.NFQUEUEV6_NUM)])
